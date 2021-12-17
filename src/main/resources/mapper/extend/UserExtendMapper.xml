@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.cms.mapper.extend.UserExtendMapper">
+    <resultMap id="userWithRole"
+    extends="com.briup.cms.mapper.UserMapper.BaseResultMap"
+    type="com.briup.cms.entity.extend.UserExtend">
+        <association property="role" javaType="com.briup.cms.entity.Role"
+            select="com.briup.cms.mapper.RoleMapper.selectByPrimaryKey" column="role_id"></association>
+    </resultMap>
+    <select id="getAll" resultMap="userWithRole">
+        select <include refid="com.briup.cms.mapper.UserMapper.Base_Column_List"/>
+        from cms_user
+    </select>
+     <select id="findUserByUsername" resultType="com.briup.cms.entity.User">
+        select <include refid="com.briup.cms.mapper.UserMapper.Base_Column_List"/> from cms_user
+        where username = #{username}
+    </select>
+    <delete id="deleteUserInBatch" parameterType="list">
+        delete from cms_user
+        where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

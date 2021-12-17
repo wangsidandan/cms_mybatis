@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.cms.mapper.extend.CommentExtendMapper">
+    <select id="findAll" resultMap="com.briup.cms.mapper.CommentMapper.BaseResultMap" parameterType="map">
+        select <include refid="com.briup.cms.mapper.CommentMapper.Base_Column_List"/>
+        from cms_comment
+         <where>
+            <if test="articleId != null">
+                article_id = #{articleId}
+            </if>
+        </where>
+    </select>
+</mapper>

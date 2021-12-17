@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.cms.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.briup.cms.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, birthday, gender, image, password, phone, real_name, register_time, status, username, 
+    role_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cms_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.briup.cms.entity.User">
+    insert into cms_user (id, birthday, gender, 
+      image, password, phone, 
+      real_name, register_time, status, 
+      username, role_id)
+    values (#{id,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, #{gender,jdbcType=INTEGER}, 
+      #{image,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.cms.entity.User">
+    insert into cms_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.cms.entity.User">
+    update cms_user
+    <set>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.cms.entity.User">
+    update cms_user
+    set birthday = #{birthday,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

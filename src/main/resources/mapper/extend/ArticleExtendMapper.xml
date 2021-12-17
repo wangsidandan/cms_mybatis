@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.cms.mapper.extend.ArticleExtendMapper">
+    <select id="findByCategoryId" resultType="com.briup.cms.entity.Article">
+        select <include refid="com.briup.cms.mapper.ArticleMapper.Base_Column_List"/>
+        from cms_article
+        where category_id = #{id}
+    </select>
+
+    <select id="findByTitle" resultType="com.briup.cms.entity.Article">
+        select <include refid="com.briup.cms.mapper.ArticleMapper.Base_Column_List"/>
+        from cms_article
+        where title = #{title}
+    </select>
+
+    <select id="findAll" resultMap="com.briup.cms.mapper.ArticleMapper.BaseResultMap">
+        select <include refid="com.briup.cms.mapper.ArticleMapper.Base_Column_List"/>
+        from cms_article
+    </select>
+
+
+</mapper>
