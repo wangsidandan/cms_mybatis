@@ -17,4 +17,5 @@ public interface CategoryExtendMapper {
     Page<Category> findAll(Map params);
     Category findByName(String name);
     List<Category> findByParentId(Integer id);
+    List<Category> parentCategory();
 }

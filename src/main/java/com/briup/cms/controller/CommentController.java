@@ -23,14 +23,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("comment")
 @Api(tags = "评论模块")
 public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
 	@ApiOperation(value = "添加评论",notes = "参数为json格式")
-	@PostMapping
+	@PostMapping("save")
 	public Result save(@RequestBody Comment comment) {
 		commentService.saveComment(comment);
 		return Result.success();
@@ -44,7 +44,7 @@ public class CommentController {
 	}
 	// 批量删除
 	@ApiOperation(value = "批量删除评论", notes = "提供id集合")
-	@DeleteMapping
+	@DeleteMapping("deleteBatch")
 	public Result deleteBatch(
 			@ApiParam("ids")@RequestBody List<Integer> ids) {
 		commentService.deleteCommentInBatch(ids);

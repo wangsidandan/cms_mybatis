@@ -16,4 +16,6 @@ public interface CategoryService {
 	void deleteCategoryInBatch(List<Integer> ids);
 	//更新分类序号
 	void updateCategoryNo(Integer id, Integer no);
+	// 查询父目录
+    List<Category> findParentCategory();
 }

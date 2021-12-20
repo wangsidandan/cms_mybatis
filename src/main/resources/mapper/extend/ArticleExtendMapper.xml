@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.briup.cms.mapper.extend.ArticleExtendMapper">
+    <resultMap id="resultWithCascade" extends="com.briup.cms.mapper.ArticleMapper.BaseResultMap"
+    type="com.briup.cms.entity.extend.ArticleExtend">
+        <association property="user" javaType="com.briup.cms.entity.User" column="user_id" select="com.briup.cms.mapper.UserMapper.selectByPrimaryKey"/>
+        <association property="category" javaType="com.briup.cms.entity.Category" column="category_id" select="com.briup.cms.mapper.CategoryMapper.selectByPrimaryKey"/>
+    </resultMap>
     <select id="findByCategoryId" resultType="com.briup.cms.entity.Article">
         select <include refid="com.briup.cms.mapper.ArticleMapper.Base_Column_List"/>
         from cms_article
@@ -13,7 +18,7 @@
         where title = #{title}
     </select>
 
-    <select id="findAll" resultMap="com.briup.cms.mapper.ArticleMapper.BaseResultMap">
+    <select id="findAll" resultMap="resultWithCascade">
         select <include refid="com.briup.cms.mapper.ArticleMapper.Base_Column_List"/>
         from cms_article
     </select>

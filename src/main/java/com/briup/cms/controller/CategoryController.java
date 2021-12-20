@@ -51,9 +51,16 @@ public class CategoryController {
 		PageUtil<Category> page = categoryService.findAll(pageUtil);
 		return Result.success(page);
 	}
+
+	@ApiOperation(value = "查询父目录")
+	@GetMapping("/findParentCategory")
+	public Result findParentCategory() {
+		List<Category> parentCategory= categoryService.findParentCategory();
+		return Result.success(parentCategory);
+	}
 	
 	@ApiOperation(value = "更新分类排序",notes = "改变排序字段")
-	@PutMapping("/update/{id}/{no}")
+	@PutMapping("/updateNo/{id}/{no}")
 	public Result updateCategoryNo(
 			@ApiParam(name = "id",value = "分类id",required = true) @PathVariable("id") int id,
 			@ApiParam(name = "no",value = "排序字段",required = true)  @PathVariable("no") int no) {

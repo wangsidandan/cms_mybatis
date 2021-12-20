@@ -10,7 +10,7 @@
     <select id="findAll" resultMap="categoryWithParent">
         select <include refid="com.briup.cms.mapper.CategoryMapper.Base_Column_List"/>
         from cms_category
-        order by no
+        order by no desc
     </select>
 
     <select id="findByName" resultType="com.briup.cms.entity.Category">
@@ -21,7 +21,13 @@
 
    <select id="findByParentId" resultType="com.briup.cms.entity.Category">
         select <include refid="com.briup.cms.mapper.CategoryMapper.Base_Column_List"/>
-        fr om cms_category
+        from cms_category
         where parent_id = #{id}
+    </select>
+
+    <select id="parentCategory" resultMap="com.briup.cms.mapper.CategoryMapper.BaseResultMap">
+        select <include refid="com.briup.cms.mapper.CategoryMapper.Base_Column_List"/>
+        from cms_category
+        where parent_id = 0
     </select>
 </mapper>

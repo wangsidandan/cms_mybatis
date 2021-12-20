@@ -48,6 +48,10 @@ public class CategoryServiceImpl implements CategoryService{
 		if(categoryFromDB != null){
 			throw new CustomerException(ResultCode.DATA_EXISTED);
 		}
+		category.setNo(0);
+		if(category.getParentId() == null){
+			category.setParentId(0);
+		}
 		categoryMapper.insertSelective(category);
 	}
 
@@ -81,5 +85,10 @@ public class CategoryServiceImpl implements CategoryService{
 		category.setId(id);
 		category.setNo(no);
 		categoryMapper.updateByPrimaryKeySelective(category);
+	}
+
+	@Override
+	public List<Category> findParentCategory() {
+		return categoryExtendMapper.parentCategory();
 	}
 }

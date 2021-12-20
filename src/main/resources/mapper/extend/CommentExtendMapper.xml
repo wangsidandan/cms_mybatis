@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.briup.cms.mapper.extend.CommentExtendMapper">
-    <select id="findAll" resultMap="com.briup.cms.mapper.CommentMapper.BaseResultMap" parameterType="map">
+    <resultMap id="resultWithCascade" type="com.briup.cms.entity.extend.CommentExtend" extends="com.briup.cms.mapper.CommentMapper.BaseResultMap">
+        <association property="comment" javaType="com.briup.cms.entity.Comment" column="comment_id" select="com.briup.cms.mapper.CommentMapper.selectByPrimaryKey"/>
+        <association property="article" javaType="com.briup.cms.entity.Article" column="article_id" select="com.briup.cms.mapper.ArticleMapper.selectByPrimaryKey"/>
+        <association property="user" javaType="com.briup.cms.entity.User" column="user_id" select="com.briup.cms.mapper.UserMapper.selectByPrimaryKey"/>
+    </resultMap>
+    <select id="findAll" resultMap="resultWithCascade" parameterType="map">
         select <include refid="com.briup.cms.mapper.CommentMapper.Base_Column_List"/>
         from cms_comment
          <where>

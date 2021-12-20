@@ -23,20 +23,20 @@ import com.briup.cms.service.ArticleService;
 import com.briup.cms.utils.Result;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("article")
 @Api(tags = "文章模块")
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
 	@ApiOperation(value = "新增文章")
-	@PostMapping
+	@PostMapping("save")
 	public Result save(@RequestBody Article article) {
 		articleService.save(article);
 		return Result.success();
 	}
 	@ApiOperation(value = "修改文章")
-	@PutMapping
+	@PutMapping("update")
 	public Result update(@RequestBody Article article) {
 		articleService.update(article);
 		return Result.success();
@@ -50,7 +50,7 @@ public class ArticleController {
 	}
 	
 	@ApiOperation(value = "修改文章状态", notes = "提供id和status")
-	@PutMapping("{id}/{status}")
+	@PutMapping("/updateStatus/{id}/{status}")
 	public Result updateArticleStatus(
 			@ApiParam(name = "id",value = "文章id",required = true)	@PathVariable("id")Integer id,
 			@ApiParam(name = "status",value = "审核状态",required = true) @PathVariable("status") Integer status) {
@@ -69,7 +69,7 @@ public class ArticleController {
 	}
 	
 	@ApiOperation(value = "批量删除文章", notes = "提供id集合")
-	@DeleteMapping
+	@DeleteMapping("deleteBatch")
 	public Result deleteBatch(@ApiParam(value = "文章id") @RequestBody List<Integer> ids) {
 		articleService.deleteArticleInBatch(ids);
 		return Result.success();
